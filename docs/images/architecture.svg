@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1120 560" width="1120" height="560" role="img" aria-labelledby="title desc" font-family="system-ui, -apple-system, 'Segoe UI', sans-serif">
+  <title id="title">RetailPulse architecture</title>
+  <desc id="desc">Data flows from the UCI Online Retail source into an immutable raw layer, through pandas cleaning rules into a processed layer, into PostgreSQL staging and analytics schemas, and out to SQL analyses, pandas analytics, a Streamlit dashboard and Power BI exports. Pytest checks that SQL and pandas results agree.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0 0 L10 5 L0 10 z" fill="#52514e"/>
+    </marker>
+  </defs>
+  <rect width="1120" height="560" fill="#fcfcfb"/>
+
+  <g font-size="12" fill="#898781" font-weight="600" letter-spacing="0.6">
+    <text x="24" y="34">SOURCE</text>
+    <text x="232" y="34">FILE LAYERS</text>
+    <text x="566" y="34">POSTGRESQL 16</text>
+    <text x="900" y="34">OUTPUTS</text>
+  </g>
+
+  <g fill="#ffffff" stroke="#c3c2b7" stroke-width="1">
+    <rect x="24" y="52" width="168" height="84" rx="8"/>
+    <rect x="24" y="168" width="168" height="84" rx="8"/>
+    <rect x="232" y="52" width="290" height="84" rx="8"/>
+    <rect x="232" y="168" width="290" height="100" rx="8"/>
+    <rect x="232" y="300" width="290" height="84" rx="8"/>
+    <rect x="566" y="52" width="290" height="100" rx="8"/>
+    <rect x="566" y="184" width="290" height="200" rx="8"/>
+    <rect x="900" y="52" width="196" height="76" rx="8"/>
+    <rect x="900" y="144" width="196" height="76" rx="8"/>
+    <rect x="900" y="236" width="196" height="76" rx="8"/>
+    <rect x="900" y="328" width="196" height="76" rx="8"/>
+  </g>
+  <rect x="232" y="436" width="864" height="92" rx="8" fill="#ffffff" stroke="#2a78d6" stroke-width="1.5"/>
+
+  <g fill="#0b0b0b" font-size="15" font-weight="600">
+    <text x="40" y="82">UCI Online Retail</text>
+    <text x="40" y="198">Synthetic generator</text>
+    <text x="248" y="82">data/raw</text>
+    <text x="248" y="198">Cleaning rules</text>
+    <text x="248" y="330">data/processed</text>
+    <text x="582" y="82">staging schema</text>
+    <text x="582" y="214">analytics schema (star)</text>
+    <text x="916" y="82">SQL analyses</text>
+    <text x="916" y="174">pandas analytics</text>
+    <text x="916" y="266">Streamlit dashboard</text>
+    <text x="916" y="358">Power BI exports</text>
+    <text x="248" y="466">Pytest and Ruff</text>
+  </g>
+
+  <g fill="#52514e" font-size="12.5">
+    <text x="40" y="104">xlsx, 541,909 rows</text>
+    <text x="40" y="122">CC BY 4.0</text>
+    <text x="40" y="220">Seeded, labelled</text>
+    <text x="40" y="238">CI and offline fallback</text>
+
+    <text x="248" y="104">Immutable source file</text>
+    <text x="248" y="122">source_metadata.json with SHA-256</text>
+
+    <text x="248" y="220">src/retailpulse/cleaning</text>
+    <text x="248" y="238">Every row kept and classified:</text>
+    <text x="248" y="256">sale, return or excluded + reason</text>
+
+    <text x="248" y="352">transactions.parquet, products.parquet</text>
+    <text x="248" y="370">quality/*.csv exclusion reports</text>
+
+    <text x="582" y="104">transactions: all rows with flags</text>
+    <text x="582" y="122">products: description and category</text>
+    <text x="582" y="140">Loaded with COPY, full refresh</text>
+
+    <text x="582" y="238">fact_sales: valid sale and return lines</text>
+    <text x="582" y="258">dim_date, dim_product, dim_customer</text>
+    <text x="582" y="278">v_orders, v_customer_rfm</text>
+    <text x="582" y="306">Built in SQL from staging</text>
+    <text x="582" y="326">Primary and foreign keys, CHECK</text>
+    <text x="582" y="346">constraints, three measured indexes</text>
+
+    <text x="916" y="104">sql/analysis/01 to 06</text>
+    <text x="916" y="120">31 named queries to CSV</text>
+    <text x="916" y="196">src/retailpulse/analytics</text>
+    <text x="916" y="212">KPIs, RFM, cohorts</text>
+    <text x="916" y="288">dashboard/app.py</text>
+    <text x="916" y="304">Four pages, live filters</text>
+    <text x="916" y="380">dashboard/exports/*.csv</text>
+    <text x="916" y="396">Star schema for import</text>
+
+    <text x="248" y="490">Unit tests cover the cleaning rules and every metric. Integration tests load the synthetic dataset into</text>
+    <text x="248" y="510">PostgreSQL and assert that the SQL analyses return the same figures as their pandas counterparts.</text>
+  </g>
+
+  <g stroke="#52514e" stroke-width="1.5" fill="none" marker-end="url(#arrow)">
+    <path d="M192 94 H228"/>
+    <path d="M192 210 H210 V110 H228"/>
+    <path d="M377 136 V164"/>
+    <path d="M377 268 V296"/>
+    <path d="M522 342 H544 V102 H562"/>
+    <path d="M711 152 V180"/>
+    <path d="M856 230 H878 V90 H896"/>
+    <path d="M856 356 H896"/>
+    <path d="M522 366 H536 V408 H886 V274 H896"/>
+    <path d="M886 274 V182 H896"/>
+  </g>
+  <g stroke="#2a78d6" stroke-width="1.5" fill="none" stroke-dasharray="none" marker-end="url(#arrow)">
+    <path d="M998 436 V408"/>
+  </g>
+</svg>
